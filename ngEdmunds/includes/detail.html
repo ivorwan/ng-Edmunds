@@ -3,11 +3,8 @@
         <!--=== Content Part ===-->
         <div class="container content">
 
-            <div ng-controller="detailCtrl" class="row">
-                {{3+4}}
-                {{styleId}}
-                
-                <div class="col-md-6">
+            <div ng-controller="detailCtrl" class="row" ng-show="carData">
+                <div class="col-md-8">
                     <div class="headline"><h2>{{carData.name}}</h2></div>
                     <dl class="dl-horizontal">
                         <dt>Make</dt>
@@ -20,11 +17,16 @@
                         <dd>{{carData.engine.horsepower}} hp</dd>
                         <dt>Transmission</dt>
                         <dd>{{carData.transmission.transmissionType}}</dd>
+                        <dt>MPG</dt>
+                        <dd>{{carData.MPG.highway}} hwy / {{carData.MPG.city}} city</dd>
                         
                     </dl>
-                </div>
-                <div class="col-md-6">
+                    <div class="clearfix margin-bottom-30"></div>
+                    <div class="headline"><h2>Reviews</h2></div>
 
+                </div>
+                <div class="col-md-4">
+                    <div class="headline"><h2>Photos</h2></div>
                     <div style="width: 305px;">
                         <carousel interval="30000">
                             <slide ng-repeat="style in carData.photos" active="style.active" style="background: -webkit-gradient(linear, left top, left bottom, color-stop(20%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,1)));">
