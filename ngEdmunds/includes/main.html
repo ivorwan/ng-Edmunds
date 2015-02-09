@@ -1,0 +1,49 @@
+﻿        <!--=== Content Part ===-->
+<div class="container content">
+
+    <div ng-controller="mainCtrl">
+
+        <div class="clearfix margin-bottom-30"></div>
+        <div class="shadow-wrapper">
+            <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+                <h2>Select the Make and Model:</h2>
+                <p>We'll pull information for you...</p>
+                <div class="row">
+
+                    <div class="col-sm-4 col-md-4 col-4">
+                        Make:
+                        <select ng-options="make.id as make.name for make in makes" ng-model="make" ng-change="getModels(make)" class="form-control"></select>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-4">
+                        Model:
+                        <select ng-options="model.id as model.name for model in models" ng-model="model" ng-change="getYears(make, model)" class="form-control"></select>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-4">
+                        Year:
+                        <select ng-options="year.id as year.name for year in years" ng-model="year" ng-change="getStyles(make, model, year)" class="form-control"></select>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row margin-bottom-40" ng-show="styles">
+            <div class="headline"><h2>Available Trims</h2></div>
+            <div class="col-md-8 md-margin-bottom-40">
+
+                <ul class="list-unstyled margin-bottom-15">
+                    <li ng-repeat="style in styles">
+                        <i class="fa fa-chevron-circle-right color-green margin-right-5"></i><a ng-href="#/detail/{{style.id}}">{{style.name}} - {{style.trim}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4 md-margin-bottom-40">
+            </div>
+
+
+        </div>
+
+    </div>
+</div><!--/container-->
+<!-- End Content Part -->
