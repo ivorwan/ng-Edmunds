@@ -1,9 +1,9 @@
 ﻿
 
         <!--=== Content Part ===-->
-        <div class="container content">
+        <div class="container content" ng-controller="detailCtrl">
 
-            <div ng-controller="detailCtrl" class="row" ng-show="carData">
+            <div class="row" ng-show="carData">
                 <div class="col-md-8">
                     <div class="headline"><h2>{{carData.name}}</h2></div>
                     <dl class="dl-horizontal">
@@ -23,6 +23,10 @@
                     </dl>
                     <div class="clearfix margin-bottom-30"></div>
                     <div class="headline"><h2>Reviews</h2></div>
+                    <div ng-hide="{{carData.reviews}}">
+                        Wait 5 secs... Timer added to show async load of reviews.
+                    </div>
+                    <div>{{carData.reviews}}</div>
 
                 </div>
                 <div class="col-md-4">
@@ -41,4 +45,11 @@
                     </div>
 
                 </div>
-        </div><!--/container-->
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+
+                </div>
+            </div>
+        </div>
+            <!--/container-->

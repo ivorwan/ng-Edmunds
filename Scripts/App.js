@@ -137,10 +137,24 @@
         $scope.styleId = $routeParams.styleId;
 
         //console.log($routeParams.styleId);
+        // loads carData first, then loads reviews
         edmundsSvc.getStyle($scope.styleId)
             .then(function (data) {
                 $scope.carData = data;
+                return ($scope.carData);
+            })
+            .then(function(carData){
+                setTimeout(function(){
+                    edmundsSvc.getReviews($scope.styleId)
+                        .then(function(data){
+                            carData.reviews = data;
+                        });
+
+                },5000);
+
             });
+
+
 
 
 

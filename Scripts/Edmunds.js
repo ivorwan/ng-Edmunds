@@ -43,7 +43,15 @@
                       return car;
                   });
 
+              },
+              getReviews : function(styleId){
+                  return $http.get("https://api.edmunds.com/api/vehiclereviews/v2/styles/200421519?sortby=created%3ADESC&pagenum=1&pagesize=5&fmt=json&api_key=pmhmntqjtfp9qex4gyj9far8")
+                      .then(function(response){
+                          return response.data;
+                      })
+
               }
+
               
 
 
