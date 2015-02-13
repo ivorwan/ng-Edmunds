@@ -6,11 +6,12 @@
         //$locationProvider.html5Mode(true);
         $routeProvider
           .when('/', {
-              templateUrl: '/includes/main.html',
+              templateUrl: 'includes/main.html',
               controller: 'mainCtrl'
           })
+
           .when('/detail/:styleId', {
-              templateUrl: '/includes/detail.html',
+              templateUrl: 'includes/detail.html',
               controller: 'detailCtrl'
           })
           .otherwise({ redirectTo: '/' });
