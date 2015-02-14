@@ -45,10 +45,14 @@
           var niceMake;
           var niceModel
           var year;
+          $scope.makes = [{id:0, name: 'Loading Data...'}];
+          $scope.make = 0;//makes[0];
 
 
           edmundsSvc.getMakes().then(function (data) {
+
               $scope.makes = data.makes;
+              //console.log($scope.makes);
               /*
               $scope.makes = data.makes.map(function(item) {
                 return {

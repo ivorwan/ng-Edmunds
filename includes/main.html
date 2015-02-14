@@ -7,18 +7,27 @@
         <div class="shadow-wrapper">
             <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
                 <h2>Select the Make and Model:</h2>
-                <p>We'll pull information for you...</p>
+                <p>We will fetch details for your selection.</p>
                 <div class="row">
 
                     <div class="col-sm-4 col-md-4 col-4">
-                        Make:
-                        <select ng-options="make.id as make.name for make in makes" ng-model="make" ng-change="getModels(make)" class="form-control"></select>
+                        <div class="form-row">
+                            Make:
+                        </div>
+                        <div class="form-row">
+                            <select ng-options="make.id as make.name for make in makes" ng-model="make" ng-change="getModels(make)" class="form-control">
+
+                            </select>
+                            {{make}}
+
+
+                        </div>
                     </div>
-                    <div class="col-sm-4 col-md-4 col-4">
+                    <div class="col-sm-4 col-md-4 col-4" ng-show="models">
                         Model:
-                        <select ng-options="model.id as model.name for model in models" ng-model="model" ng-change="getYears(make, model)" class="form-control"></select>
+                        <select ng-options="model.id as model.name for model in models" ng-model="model" ng-change="getYears(make, model)" class="form-control" ></select>
                     </div>
-                    <div class="col-sm-4 col-md-4 col-4">
+                    <div class="col-sm-4 col-md-4 col-4" ng-show="years">
                         Year:
                         <select ng-options="year.id as year.name for year in years" ng-model="year" ng-change="getStyles(make, model, year)" class="form-control"></select>
                     </div>
@@ -28,20 +37,17 @@
             </div>
         </div>
 
-        <div class="row margin-bottom-40" ng-show="styles">
-            <div class="headline"><h2>Available Trims</h2></div>
-            <div class="col-md-8 md-margin-bottom-40">
+        <div class="headline"><h2>Available Trims</h2></div>
+        <div class="col-md-12 md-margin-bottom-40 fade-animation">
 
-                <ul class="list-unstyled margin-bottom-15">
-                    <li ng-repeat="style in styles">
-                        <i class="fa fa-chevron-circle-right color-green margin-right-5"></i><a ng-href="#/detail/{{style.id}}">{{style.name}} - {{style.trim}}</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-4 md-margin-bottom-40">
-            </div>
+            <ul class="list-unstyled margin-bottom-15">
+                <li ng-repeat="style in styles">
+                    <i class="fa fa-chevron-circle-right color-green margin-right-5"></i><a ng-href="#/detail/{{style.id}}">{{style.name}} - {{style.trim}}</a>
+                </li>
+            </ul>
+        </div>
 
-
+        <div class="row margin-bottom-40">
         </div>
 
     </div>

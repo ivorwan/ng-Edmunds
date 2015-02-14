@@ -2,3 +2,32 @@
 .nav, .pagination, .carousel, .panel-title a {
     cursor: pointer;
 }
+
+.icon-spinner + select{
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+/*
+.fade-animation.ng-hide-add, .fade-animation.ng-hide-remove {
+    transition: 1.5s linear all;
+    display: block !important;
+}
+
+.fade-animation.ng-hide-remove {
+    opacity: 0;
+}
+
+.fade-animation.ng-hide-remove.ng-hide-remove-active {
+    opacity: .8;
+}
+
+.fade-animation.ng-hide-add {
+    opacity: 0;
+}
+
+.fade-animation.ng-hide-add.ng-hide-add-active {
+    opacity: 0;
+}
+*/

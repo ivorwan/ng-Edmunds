@@ -23,15 +23,28 @@
                     </dl>
                     <div class="clearfix margin-bottom-30"></div>
                     <div class="headline"><h2>Reviews</h2></div>
+
+
                     <div ng-hide="{{carData.reviews}}">
                         Wait 5 secs... Timer added to show async load of reviews.
+
                     </div>
+                    <i class="icon-spinner icon-spin icon-large" ng-hide="carData.reviews"></i>
                     <div>{{carData.reviews}}</div>
+
 
                 </div>
                 <div class="col-md-4">
                     <div class="headline"><h2>Photos</h2></div>
                     <div style="width: 305px;">
+                        <i class="icon-spinner icon-spin icon-large" ng-hide="carData.photos"></i>
+<!--
+                        <ul>
+                            <li ng-repeat="style in carData.photos">
+                                <img ng-src="http://media.ed.edmunds-media.com{{style.id.substring(9) + '_300.jpg'}}" style="margin:auto;">
+                            </li>
+                        </ul>
+-->
                         <carousel interval="30000">
                             <slide ng-repeat="style in carData.photos" active="style.active" style="background: -webkit-gradient(linear, left top, left bottom, color-stop(20%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,1)));">
                                 <img ng-src="http://media.ed.edmunds-media.com{{style.id.substring(9) + '_300.jpg'}}" style="margin:auto;">
