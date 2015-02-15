@@ -31,3 +31,16 @@
     opacity: 0;
 }
 */
+
+.ng-edmunds-carousel {
+
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(20%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,1)));
+
+}
+/*
+.carousel-caption {
+    position: relative;
+    left: 0px;
+    color: black;
+}
+*/

@@ -25,12 +25,44 @@
                     <div class="headline"><h2>Reviews</h2></div>
 
 
-                    <div ng-hide="{{carData.reviews}}">
-                        Wait 5 secs... Timer added to show async load of reviews.
+                    <div ng-hide="carData.reviews">
+                        <i class="icon-spinner icon-spin icon-large"></i> Wait 5 secs... Timer added to show async load of reviews.
 
                     </div>
-                    <i class="icon-spinner icon-spin icon-large" ng-hide="carData.reviews"></i>
-                    <div>{{carData.reviews}}</div>
+
+                    <dl class="dl-horizontal" ng-show="carData.reviews">
+                        <dt>Avg Rating</dt>
+                        <dd>{{carData.reviews.averageRating}}</dd>
+                        <dt>Reviews Count</dt>
+                        <dd>{{carData.reviews.reviewsCount}}</dd>
+
+                    </dl>
+                    <div class="heading heading-v1 margin-bottom-40">
+                        <h2>User Reviews</h2>
+
+                    </div>
+                    <ul class="list-unstyled">
+                        <li ng-repeat="review in carData.reviews.reviews" class="margin-bottom-30">
+
+                            <h4><i class="fa fa-book color-green margin-right-5"></i>{{review.title}} - {{review.author.authorName}}</h4>
+
+                            <p>{{review.text}}</p>
+                            <span class="pull-right">{{review.thumbsUpDownCounter.thumbsUp}} <i class="fa fa-thumbs-up color-green"></i> - {{review.thumbsUpDownCounter.thumbsDown}} <i class="fa fa-thumbs-down color-red"></i></span>
+                            <dl class="dl-horizontal">
+                                <dt ng-repeat-start="rating in review.ratings">
+                                    {{rating.type}}
+                                </dt>
+                                <dd ng-repeat-end>
+                                    {{rating.value}}
+                                </dd>
+                            </dl>
+                            <hr class="devider devider-db">
+
+
+                        </li>
+                    </ul>
+
+
 
 
                 </div>
@@ -45,8 +77,8 @@
                             </li>
                         </ul>
 -->
-                        <carousel interval="30000">
-                            <slide ng-repeat="style in carData.photos" active="style.active" style="background: -webkit-gradient(linear, left top, left bottom, color-stop(20%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,1)));">
+                        <carousel interval="300000">
+                            <slide ng-repeat="style in carData.photos" active="style.active" class="ng-edmunds-carousel">
                                 <img ng-src="http://media.ed.edmunds-media.com{{style.id.substring(9) + '_300.jpg'}}" style="margin:auto;">
                                 <div class="carousel-caption">
                                     <p class="color-light">{{style.captionTranscript}}</p>
