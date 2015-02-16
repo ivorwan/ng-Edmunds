@@ -38,6 +38,29 @@
     });
 
 
+    app.directive('shake', ['$animate',
+        function($animate) {
+            return {
+                scope: {
+                    carData: '='
+                },
+                link: function(scope, element, attrs) {
+
+                    scope.$watch('carData.reviews', function(newValue, oldValue) {
+                        console.log('change');
+
+                        if (newValue === oldValue) return;
+
+                        $animate.addClass(element, 'shake').then(function() {
+                            element.removeClass('shake');
+                        });
+                    });
+                }
+            };
+        }
+    ]);
+
+
     //----- controllers
     app.controller('mainCtrl', ['$scope', 'edmundsSvc',
       function ($scope, edmundsSvc) {
@@ -71,7 +94,7 @@
 
                       this.niceMake = $scope.makes[i].niceName;
                       $scope.models = $scope.makes[i].models;
-                      console.log(this.niceMake);
+                      //console.log(this.niceMake);
                       break;
                   }
 
@@ -137,8 +160,41 @@
     ]);
 
 
-    app.controller('detailCtrl', ['$scope', '$routeParams', 'edmundsSvc', function ($scope, $routeParams, edmundsSvc) {
+    app.controller('detailCtrl', ['$scope', '$routeParams', '$anchorScroll', '$location', 'edmundsSvc', function ($scope, $routeParams, $anchorScroll, $location, edmundsSvc) {
         $scope.styleId = $routeParams.styleId;
+
+        $scope.currentPage = 1;
+        $scope.totalItems = 0;
+        $scope.maxSize = 5;
+        $scope.itemsPerPage = 5;
+        $scope.loadingReviews = false;
+
+        var gotoAnchor = function(x) {
+            var newHash = x;
+            if ($location.hash() !== newHash) {
+                // set the $location.hash to `newHash` and
+                // $anchorScroll will automatically scroll to it
+                $location.hash(x);
+            } else {
+                // call $anchorScroll() explicitly,
+                // since $location.hash hasn't changed
+                $anchorScroll();
+            }
+        };
+
+        $scope.pageChanged = function() {
+
+            console.log('Page changed to: ' + $scope.currentPage);
+            $scope.loadingReviews = true;
+            edmundsSvc.getReviews($scope.styleId, $scope.itemsPerPage, $scope.currentPage)
+                .then(function(data){
+                    $scope.carData.reviews = data;
+                    $scope.loadingReviews = false;
+                });
+            gotoAnchor('div-reviews');
+        };
+
+
 
         //console.log($routeParams.styleId);
         // loads carData first, then loads reviews
@@ -148,13 +204,17 @@
                 return ($scope.carData);
             })
             .then(function(carData){
+                $scope.loadingReviews = true;
                 setTimeout(function(){
-                    edmundsSvc.getReviews($scope.styleId)
+                    edmundsSvc.getReviews($scope.styleId, $scope.itemsPerPage, 1)
                         .then(function(data){
+
                             carData.reviews = data;
+
                         });
 
                 },5000);
+                $scope.loadingReviews = false;
 
             });
 

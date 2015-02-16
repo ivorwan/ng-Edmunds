@@ -22,7 +22,7 @@
                         
                     </dl>
                     <div class="clearfix margin-bottom-30"></div>
-                    <div class="headline"><h2>Reviews</h2></div>
+                    <div class="headline" id="div-reviews"><h2>Reviews</h2></div>
 
 
                     <div ng-hide="carData.reviews">
@@ -30,37 +30,48 @@
 
                     </div>
 
-                    <dl class="dl-horizontal" ng-show="carData.reviews">
-                        <dt>Avg Rating</dt>
-                        <dd>{{carData.reviews.averageRating}}</dd>
-                        <dt>Reviews Count</dt>
-                        <dd>{{carData.reviews.reviewsCount}}</dd>
+                    <div id="review-container" ng-show="carData.reviews">
+                        <!--
+                        <dl class="dl-horizontal" ng-show="carData.reviews">
+                            <dt>Avg Rating</dt>
+                            <dd>{{carData.reviews.averageRating}}</dd>
+                            <dt>Reviews Count</dt>
+                            <dd>{{carData.reviews.reviewsCount}}</dd>
 
-                    </dl>
-                    <div class="heading heading-v1 margin-bottom-40">
-                        <h2>User Reviews</h2>
+                        </dl>
+                        <div class="heading heading-v1 margin-bottom-40">
+                            <h2>User Reviews</h2>
+
+                        </div>
+                        -->
+                        <ul class="list-unstyled">
+                            <li ng-repeat="review in carData.reviews.reviews" class="margin-bottom-30 slow-show" carData="carData">
+
+                                <h4><i class="fa fa-book color-green margin-right-5"></i>{{review.title}}</h4>
+                                By <b>{{review.author.authorName}}</b> on {{review.created | date : "MM/dd/yyyy h:mma"}}
+
+                                <p>{{review.text}}</p>
+                                <span class="pull-right">{{review.thumbsUpDownCounter.thumbsUp}} <i class="fa fa-thumbs-up color-green"></i> - {{review.thumbsUpDownCounter.thumbsDown}} <i class="fa fa-thumbs-down color-red"></i></span>
+                                <dl class="dl-horizontal">
+                                    <dt ng-repeat-start="rating in review.ratings">
+                                        {{rating.type}}
+                                    </dt>
+                                    <dd ng-repeat-end>
+                                        {{rating.value}}
+                                    </dd>
+                                </dl>
+                                <hr class="devider devider-db">
+
+
+                            </li>
+                        </ul>
+                        <pagination total-items="carData.reviews.reviewsCount" ng-model="currentPage" max-size="maxSize" items-per-page="itemsPerPage" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()"></pagination>
+                        <pre>Total Items: {{carData.reviews.reviewsCount}} - Page: {{currentPage}} / {{numPages}}</pre>
+
+                        <div id="review-loading-data" ng-show="loadingReviews"><i class="icon-spinner icon-spin icon-large"></i>Loading Data</div>
+
 
                     </div>
-                    <ul class="list-unstyled">
-                        <li ng-repeat="review in carData.reviews.reviews" class="margin-bottom-30">
-
-                            <h4><i class="fa fa-book color-green margin-right-5"></i>{{review.title}} - {{review.author.authorName}}</h4>
-
-                            <p>{{review.text}}</p>
-                            <span class="pull-right">{{review.thumbsUpDownCounter.thumbsUp}} <i class="fa fa-thumbs-up color-green"></i> - {{review.thumbsUpDownCounter.thumbsDown}} <i class="fa fa-thumbs-down color-red"></i></span>
-                            <dl class="dl-horizontal">
-                                <dt ng-repeat-start="rating in review.ratings">
-                                    {{rating.type}}
-                                </dt>
-                                <dd ng-repeat-end>
-                                    {{rating.value}}
-                                </dd>
-                            </dl>
-                            <hr class="devider devider-db">
-
-
-                        </li>
-                    </ul>
 
 
 

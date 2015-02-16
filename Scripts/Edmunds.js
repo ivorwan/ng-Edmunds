@@ -44,8 +44,8 @@
                   });
 
               },
-              getReviews : function(styleId){
-                  return $http.get("https://api.edmunds.com/api/vehiclereviews/v2/styles/200421519?sortby=created%3ADESC&pagenum=1&pagesize=5&fmt=json&api_key=pmhmntqjtfp9qex4gyj9far8")
+              getReviews : function(styleId, pageSize, pageNum){
+                  return $http.get("https://api.edmunds.com/api/vehiclereviews/v2/styles/" + styleId + "?sortby=created%3ADESC&pagenum=" + pageNum+ "&pagesize=" + pageSize + "&fmt=json&api_key=pmhmntqjtfp9qex4gyj9far8")
                       .then(function(response){
                           return response.data;
                       })
