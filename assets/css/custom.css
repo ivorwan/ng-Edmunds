@@ -123,3 +123,13 @@
     animation: slowshow 5s;
 }
 
+
+
+
+/* TOASTR */
+#toast-container {
+    position: absolute !important;
+    z-index: 999999;
+    /*overrides*/
+
+}
