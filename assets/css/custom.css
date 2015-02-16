@@ -119,8 +119,8 @@
 }
 
 .slow-show {
-    -webkit-animation: slowshow 5s; /* Chrome, Safari, Opera */
-    animation: slowshow 5s;
+    -webkit-animation: slowshow 2s; /* Chrome, Safari, Opera */
+    animation: slowshow 2s;
 }
 
 
@@ -130,6 +130,7 @@
 #toast-container {
     position: absolute !important;
     z-index: 999999;
+    top: 0px;
     /*overrides*/
 
 }

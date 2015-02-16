@@ -5,12 +5,10 @@
 
             <div class="row" ng-show="carData">
                 <div class="col-md-8">
-                    <div class="headline"><h2>{{carData.name}}</h2></div>
+                    <div class="headline"><h2>{{carData.make.name}} {{carData.model.name}}</h2></div>
                     <dl class="dl-horizontal">
-                        <dt>Make</dt>
-                        <dd>{{carData.make.name}}</dd>
-                        <dt>Model</dt>
-                        <dd>{{carData.model.name}}</dd>
+                        <dt>Style</dt>
+                        <dd>{{carData.name}}</dd>
                         <dt>Engine</dt>
                         <dd>{{carData.engine.size}}L {{carData.engine.name}} {{carData.engine.cylinder}} cylinder</dd>
                         <dt>Horse Power</dt>
@@ -22,15 +20,34 @@
                         
                     </dl>
                     <div class="clearfix margin-bottom-30"></div>
-                    <div class="headline" id="div-reviews"><h2>Reviews</h2></div>
-
-
-                    <div ng-hide="carData.reviews">
-                        <i class="icon-spinner icon-spin icon-large"></i> Wait 5 secs... Timer added to show async load of reviews.
-
+                    <div style="position:relative">
+                        <div class="headline" id="div-reviews"><h2>Reviews</h2></div>
                     </div>
 
-                    <div id="review-container" ng-show="carData.reviews">
+
+
+
+                    <div id="review-container">
+                        <div ng-hide="carData.reviews">
+                            <i class="icon-spinner icon-spin icon-large"></i> Wait 5 secs... Timer added to show async load of reviews.
+                        </div>
+
+                        <div id="toast-container" class="toast-top-center" ng-show="loadingReviews">
+                            <div class="toast ng-scope">
+                                <button class="toast-close-button ng-hide">×</button>
+                                <div class="toast-title">Please Wait</div>
+                                <div class="toast-message">
+                                    <!-- ngSwitchWhen: trustedHtml -->
+                                    <!-- ngSwitchWhen: template -->
+                                    <!-- ngSwitchDefault:  -->
+                                    <div class=""><i class="icon-spinner icon-spin icon-large"></i>&nbsp;&nbsp;Loading Reviews</div>
+                                    <!-- end ngSwitchWhen: -->
+                                </div>
+                            </div>
+                        </div>
+
+
+
                         <!--
                         <dl class="dl-horizontal" ng-show="carData.reviews">
                             <dt>Avg Rating</dt>
@@ -65,25 +82,14 @@
 
                             </li>
                         </ul>
-                        <pagination total-items="carData.reviews.reviewsCount" ng-model="currentPage" max-size="maxSize" items-per-page="itemsPerPage" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()"></pagination>
-                        <pre>Total Items: {{carData.reviews.reviewsCount}} - Page: {{currentPage}} / {{numPages}}</pre>
-
-                        <div id="toast-container" class="toast-top-center">
-                            <!-- ngRepeat: toaster in toasters -->
-                            <div class="toast ng-scope toast-info">
-                                <button class="toast-close-button ng-hide">×</button>
-                                <div class="toast-title">Title</div>
-                                <div class="toast-message">
-                                    <!-- ngSwitchWhen: trustedHtml -->
-                                    <!-- ngSwitchWhen: template -->
-                                    <!-- ngSwitchDefault:  -->
-                                    <div class="">Hello toaster</div>
-                                    <!-- end ngSwitchWhen: -->
-                                </div>
-                            </div>
-                            <!-- end ngRepeat: toaster in toasters -->
+                        <div ng-show="carData.reviews">
+                            <pagination total-items="carData.reviews.reviewsCount" ng-model="currentPage" max-size="maxSize" items-per-page="itemsPerPage" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()"></pagination>
+                            <pre>Total Items: {{carData.reviews.reviewsCount}} - Page: {{currentPage}} / {{numPages}}</pre>
                         </div>
-                        <div id="review-loading-data" ng-show="loadingReviews"><i class="icon-spinner icon-spin icon-large"></i>Loading Data</div>
+
+                        <!--
+                        <div id="review-loading-data" ng-show="loadingReviews"><i class="icon-spinner icon-spin icon-large"></i> Loading Data</div>
+                        -->
 
 
                     </div>

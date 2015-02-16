@@ -167,7 +167,7 @@
         $scope.totalItems = 0;
         $scope.maxSize = 5;
         $scope.itemsPerPage = 5;
-        $scope.loadingReviews = false;
+        $scope.loadingReviews = true;
 
         var gotoAnchor = function(x) {
             var newHash = x;
@@ -210,11 +210,12 @@
                         .then(function(data){
 
                             carData.reviews = data;
+                            $scope.loadingReviews = false;
 
                         });
 
                 },5000);
-                $scope.loadingReviews = false;
+
 
             });
 
