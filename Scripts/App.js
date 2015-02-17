@@ -191,7 +191,7 @@
                     $scope.carData.reviews = data;
                     $scope.loadingReviews = false;
                 });
-            gotoAnchor('div-reviews');
+            //gotoAnchor('div-reviews');
         };
 
 
