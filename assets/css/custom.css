@@ -139,3 +139,8 @@
     padding-left: 10px;
     color: rgba(0, 0, 0, 0.3);
 }
+.loading img {
+    opacity: 0.4;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+    width: 30px;
+}
