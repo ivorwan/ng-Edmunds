@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f602c97c-7c8e-47f9-8bc4-299309a24bd5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Scripts/App.js" afterPath="$PROJECT_DIR$/Scripts/App.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Scripts/Edmunds.js" afterPath="$PROJECT_DIR$/Scripts/Edmunds.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/custom.css" afterPath="$PROJECT_DIR$/assets/css/custom.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/includes/detail.html" afterPath="$PROJECT_DIR$/includes/detail.html" />
     </list>
     <ignored path="ngEdmunds.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,20 +56,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Scripts/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2684" max-vertical-offset="3585">
-              <caret line="224" column="0" selection-start-line="224" selection-start-column="0" selection-end-line="224" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.5172031" vertical-offset="2684" max-vertical-offset="3615">
+              <caret line="210" column="58" selection-start-line="210" selection-start-column="58" selection-end-line="210" selection-end-column="58" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="detail.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="detail.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/includes/detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6630824" vertical-offset="0" max-vertical-offset="2130">
+            <state vertical-scroll-proportion="-10.882353" vertical-offset="0" max-vertical-offset="2130">
               <caret line="37" column="83" selection-start-line="37" selection-start-column="83" selection-end-line="37" selection-end-column="83" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
@@ -146,8 +143,8 @@
         <option value="$PROJECT_DIR$/includes/footer.html" />
         <option value="$PROJECT_DIR$/Scripts/Edmunds.js" />
         <option value="$PROJECT_DIR$/assets/css/custom.css" />
-        <option value="$PROJECT_DIR$/Scripts/App.js" />
         <option value="$PROJECT_DIR$/includes/detail.html" />
+        <option value="$PROJECT_DIR$/Scripts/App.js" />
       </list>
     </option>
   </component>
@@ -638,22 +635,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2684" max-vertical-offset="3585">
-          <caret line="224" column="0" selection-start-line="224" selection-start-column="0" selection-end-line="224" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/includes/detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6630824" vertical-offset="0" max-vertical-offset="2130">
+        <state vertical-scroll-proportion="-10.882353" vertical-offset="0" max-vertical-offset="2130">
           <caret line="37" column="83" selection-start-line="37" selection-start-column="83" selection-end-line="37" selection-end-column="83" />
           <folding>
             <element signature="n#style#0;n#div#1;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#slide#0;n#carousel#0;n#div#1;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Scripts/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5172031" vertical-offset="2684" max-vertical-offset="3615">
+          <caret line="210" column="58" selection-start-line="210" selection-start-column="58" selection-end-line="210" selection-end-column="58" />
+          <folding />
         </state>
       </provider>
     </entry>
