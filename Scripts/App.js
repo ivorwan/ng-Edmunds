@@ -208,8 +208,12 @@
                 setTimeout(function(){
                     edmundsSvc.getReviews($scope.styleId, $scope.itemsPerPage, 1)
                         .then(function(data){
-
                             carData.reviews = data;
+                            $scope.loadingReviews = false;
+
+                        },
+                        function(reason){
+                            $scope.errorMessage = "No Reviews Found";
                             $scope.loadingReviews = false;
 
                         });

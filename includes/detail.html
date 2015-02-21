@@ -2,9 +2,13 @@
 
         <!--=== Content Part ===-->
         <div class="container content" ng-controller="detailCtrl">
+            <div class="row loading" ng-hide="carData">
+                <img ng-src="assets/img/loading-rectangle.gif"/><span>Loading...</span>
+            </div>
 
             <div class="row" ng-show="carData">
                 <div class="col-md-8">
+
                     <div class="headline"><h2>{{carData.make.name}} {{carData.model.name}}</h2></div>
                     <dl class="dl-horizontal">
                         <dt>Style</dt>
@@ -28,23 +32,23 @@
 
 
                     <div id="review-container">
-                        <div ng-hide="carData.reviews">
-                            No data... Wait 5 secs... Timer added to show async load of reviews.
+                        <div ng-show="errorMessage">{{errorMessage}}</div>
+
+                        <div class="row loading" ng-show="loadingReviews">
+                            <img ng-src="assets/img/loading-rectangle.gif"/><span>Loading... 5 sec Timer added to show async load of reviews.</span>
                         </div>
 
+                        <!--
                         <div id="toast-container" class="toast-top-center" ng-show="loadingReviews">
                             <div class="toast ng-scope">
                                 <button class="toast-close-button ng-hide">×</button>
                                 <div class="toast-title">Please Wait</div>
                                 <div class="toast-message">
-                                    <!-- ngSwitchWhen: trustedHtml -->
-                                    <!-- ngSwitchWhen: template -->
-                                    <!-- ngSwitchDefault:  -->
                                     <div class=""><i class="icon-spinner icon-spin icon-large"></i>&nbsp;&nbsp;Loading Reviews</div>
-                                    <!-- end ngSwitchWhen: -->
                                 </div>
                             </div>
                         </div>
+                        -->
 
 
 
