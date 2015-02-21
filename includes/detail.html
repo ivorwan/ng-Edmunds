@@ -32,7 +32,7 @@
 
 
                     <div id="review-container">
-                        <div ng-show="errorMessage">{{errorMessage}}</div>
+                        <div ng-show="!loadingReviews && errorMessage">{{errorMessage}}</div>
 
                         <div class="row loading" ng-show="loadingReviews">
                             <img ng-src="assets/img/loading-rectangle.gif"/><span>Loading... 5 sec Timer added to show async load of reviews.</span>
