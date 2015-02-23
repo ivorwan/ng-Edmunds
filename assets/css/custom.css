@@ -52,6 +52,7 @@
 
 #review-container {
     position: relative;
+    min-height: 500px;
 }
 
 #review-loading-data {
