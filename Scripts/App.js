@@ -5,16 +5,19 @@
     app.config(function ($routeProvider, $locationProvider) {
         //$locationProvider.html5Mode(true);
         $routeProvider
-          .when('/', {
-              templateUrl: 'includes/main.html',
-              controller: 'mainCtrl'
-          })
-
-          .when('/detail/:styleId', {
-              templateUrl: 'includes/detail.html',
-              controller: 'detailCtrl'
-          })
-          .otherwise({ redirectTo: '/' });
+            .when('/', {
+                templateUrl: 'includes/main.html',
+                controller: 'mainCtrl'
+            })
+            .when('/detail/:styleId', {
+                templateUrl: 'includes/detail.html',
+                controller: 'detailCtrl'
+            })
+            .when('/detail2/:make/:model/:year', {
+                templateUrl: 'includes/detail2.html',
+                controller: 'detail2Ctrl'
+            })
+            .otherwise({ redirectTo: '/' });
 
 
     });
@@ -62,10 +65,10 @@
 
 
     //----- controllers
-    app.controller('mainCtrl', ['$scope', 'edmundsSvc',
-      function ($scope, edmundsSvc) {
+    app.controller('mainCtrl', ['$scope', '$location', 'edmundsSvc',
+      function ($scope, $location, edmundsSvc) {
           $scope.name = 'Eita';
-          var niceMake;
+          //var niceMake;
           var niceModel
           var year;
           $scope.makes = [{id:0, name: 'Loading Data...'}];
@@ -88,11 +91,13 @@
           });
 
           $scope.getModels = function (make) {
+              //console.log(make);
               //console.log($scope.makes);
+              // makes dataset has models, so instead of pulling from API, simply find models in original dataset
               for (var i = 0; i <= $scope.makes.length; i++) {
-                  if ($scope.makes[i].id === make) {
+                  if ($scope.makes[i].niceName === make) {
 
-                      this.niceMake = $scope.makes[i].niceName;
+                      //this.niceMake = $scope.makes[i].niceName;
                       $scope.models = $scope.makes[i].models;
                       //console.log(this.niceMake);
                       break;
@@ -115,8 +120,8 @@
           $scope.getYears = function (make, model) {
 
               for (var i = 0; i <= $scope.models.length; i++) {
-                  if ($scope.models[i].id === model) {
-                      this.niceModel = $scope.models[i].niceName;
+                  if ($scope.models[i].niceName === model) {
+                      //this.niceModel = $scope.models[i].niceName;
                       $scope.years = $scope.models[i].years.map(function (item) {
                           return {
                               id: item.year,
@@ -141,8 +146,9 @@
           }
 
           $scope.getStyles = function (niceMake, niceModel, year) {
-              edmundsSvc.getStyles(this.niceMake, this.niceModel, $scope.year).then(function (data) {
-                  //console.log(this.niceMake + ' - ' + this.niceModel + ' - ' + $scope.year)
+              console.log(niceMake + ' - ' + niceModel + ' - ' + year);
+              edmundsSvc.getStyles(niceMake, niceModel, year).then(function (data) {
+
                   $scope.styles = data.styles.map(function (item) {
                       /*
                       edmundsSvc.getPhotos(item.id).then(function (data) {
@@ -156,9 +162,88 @@
               })
           }
 
+          $scope.goToDetail2 = function(niceMake, niceModel, year){
+              console.log('goToDetail2');
+              var path = '/detail2/' + niceMake + '/' + niceModel + '/' + year;
+              console.log(path);
+              var loc = $location.path(path);
+              console.log(loc);
+          }
+
       }
     ]);
 
+
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
+    app.controller('detail2Ctrl', ['$scope', '$routeParams', '$location', 'edmundsSvc', function($scope, $routeParams, $location, edmundsSvc){
+
+        $scope.make = $routeParams.make;
+        $scope.model = $routeParams.model;
+        $scope.year = $routeParams.year;
+
+        $scope.currentPage = 1;
+        $scope.totalItems = 0;
+        $scope.maxSize = 5;
+        $scope.itemsPerPage = 5;
+        $scope.loadingReviews = true;
+
+        $scope.updateStyle = function(){
+            $scope.errorMessage = '';
+
+            edmundsSvc.getStyle($scope.selectedStyle.id)
+                .then(function (data) {
+                    $scope.carData = data;
+                    return ($scope.carData);
+                })
+                .then(function(carData){
+                    $scope.loadingReviews = true;
+
+                    edmundsSvc.getReviews($scope.selectedStyle.id, $scope.itemsPerPage, $scope.currentPage)
+                        .then(function(data){
+                            $scope.loadingReviews = false;
+                            carData.reviews = data;
+                        },
+                        function(reason){
+
+                            $scope.loadingReviews = false;
+                            $scope.errorMessage = "No Reviews Found";
+
+                        });
+
+
+                });
+
+        }
+
+
+        $scope.pageChanged = function() {
+
+            console.log('Page changed to: ' + $scope.currentPage);
+            $scope.loadingReviews = true;
+            edmundsSvc.getReviews($scope.selectedStyle.id, $scope.itemsPerPage, $scope.currentPage)
+                .then(function(data){
+                    $scope.loadingReviews = false;
+                    $scope.carData.reviews = data;
+                });
+            //gotoAnchor('div-reviews');
+        };
+
+        edmundsSvc.getStyles($scope.make, $scope.model, $scope.year)
+            .then(function (data) {
+
+                $scope.styles = data.styles;
+                if ($scope.styles.length >= 0) {
+                    $scope.selectedStyle = $scope.styles[0];
+                    // retrieves style's info
+
+                    $scope.updateStyle();
+                }
+            });
+
+
+
+    }]);
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
 
     app.controller('detailCtrl', ['$scope', '$routeParams', '$anchorScroll', '$location', 'edmundsSvc', function ($scope, $routeParams, $anchorScroll, $location, edmundsSvc) {
         $scope.styleId = $routeParams.styleId;
@@ -168,19 +253,6 @@
         $scope.maxSize = 5;
         $scope.itemsPerPage = 5;
         $scope.loadingReviews = true;
-
-        var gotoAnchor = function(x) {
-            var newHash = x;
-            if ($location.hash() !== newHash) {
-                // set the $location.hash to `newHash` and
-                // $anchorScroll will automatically scroll to it
-                $location.hash(x);
-            } else {
-                // call $anchorScroll() explicitly,
-                // since $location.hash hasn't changed
-                $anchorScroll();
-            }
-        };
 
         $scope.pageChanged = function() {
 

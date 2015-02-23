@@ -1,0 +1,139 @@
+<!--=== Content Part ===-->
+<div class="container content">
+    <div class="row loading" ng-hide="carData">
+        <img ng-src="assets/img/loading-rectangle.gif"/><span>Loading...</span>
+    </div>
+
+    <div class="row" ng-show="carData">
+        <div class="col-md-8">
+
+            <div class="headline"><h2>{{carData.make.name}} {{carData.model.name}}</h2></div>
+            <dl class="dl-horizontal">
+                <dt>Style</dt>
+                <dd>
+                    <select ng-options="style as style.name for style in styles" ng-model="selectedStyle" class="form-control" ng-change="updateStyle(selectedStyle)">
+
+                    </select>
+                </dd>
+                <dt>Engine</dt>
+                <dd>{{carData.engine.size}}L {{carData.engine.name}} {{carData.engine.cylinder}} cylinder</dd>
+                <dt>Horse Power</dt>
+                <dd>{{carData.engine.horsepower}} hp</dd>
+                <dt>Transmission</dt>
+                <dd>{{carData.transmission.transmissionType}}</dd>
+                <dt>MPG</dt>
+                <dd>{{carData.MPG.highway}} hwy / {{carData.MPG.city}} city</dd>
+
+            </dl>
+            <div class="clearfix margin-bottom-30"></div>
+
+            <div class="headline"><h2>Reviews</h2></div>
+
+
+
+
+
+            <div id="review-container">
+                <div ng-show="!loadingReviews && errorMessage">{{errorMessage}}</div>
+
+                <div class="row loading" ng-show="loadingReviews">
+                    <img ng-src="assets/img/loading-rectangle.gif"/><span>Loading... 5 sec Timer added to show async load of reviews.</span>
+                </div>
+
+                <!--
+                <div id="toast-container" class="toast-top-center" ng-show="loadingReviews">
+                    <div class="toast ng-scope">
+                        <button class="toast-close-button ng-hide">×</button>
+                        <div class="toast-title">Please Wait</div>
+                        <div class="toast-message">
+                            <div class=""><i class="icon-spinner icon-spin icon-large"></i>&nbsp;&nbsp;Loading Reviews</div>
+                        </div>
+                    </div>
+                </div>
+                -->
+
+
+
+                <!--
+                <dl class="dl-horizontal" ng-show="carData.reviews">
+                    <dt>Avg Rating</dt>
+                    <dd>{{carData.reviews.averageRating}}</dd>
+                    <dt>Reviews Count</dt>
+                    <dd>{{carData.reviews.reviewsCount}}</dd>
+
+                </dl>
+                <div class="heading heading-v1 margin-bottom-40">
+                    <h2>User Reviews</h2>
+
+                </div>
+                -->
+                <ul class="list-unstyled">
+                    <li ng-repeat="review in carData.reviews.reviews" class="margin-bottom-30 slow-show" carData="carData">
+
+                        <h4><i class="fa fa-book color-green margin-right-5"></i>{{review.title}}</h4>
+                        By <b>{{review.author.authorName}}</b> on {{review.created | date : "MM/dd/yyyy h:mma"}}
+
+                        <p>{{review.text}}</p>
+                        <span class="pull-right">{{review.thumbsUpDownCounter.thumbsUp}} <i class="fa fa-thumbs-up color-green"></i> - {{review.thumbsUpDownCounter.thumbsDown}} <i class="fa fa-thumbs-down color-red"></i></span>
+                        <dl class="dl-horizontal">
+                            <dt ng-repeat-start="rating in review.ratings">
+                                {{rating.type}}
+                            </dt>
+                            <dd ng-repeat-end>
+                                <rating ng-model="rating.value" readonly="true" class="color-red"></rating>
+
+                            </dd>
+                        </dl>
+                        <hr class="devider devider-db">
+
+
+                    </li>
+                </ul>
+                <div ng-show="carData.reviews">
+                    <pagination total-items="carData.reviews.reviewsCount" ng-model="currentPage" max-size="maxSize" items-per-page="itemsPerPage" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()"></pagination>
+                    <pre>Total Items: {{carData.reviews.reviewsCount}} - Page: {{currentPage}} / {{numPages}}</pre>
+                </div>
+
+                <!--
+                <div id="review-loading-data" ng-show="loadingReviews"><i class="icon-spinner icon-spin icon-large"></i> Loading Data</div>
+                -->
+
+
+            </div>
+
+
+
+
+        </div>
+        <div class="col-md-4">
+            <div class="headline"><h2>Photos</h2></div>
+            <div style="width: 305px;">
+                <i class="icon-spinner icon-spin icon-large" ng-hide="carData.photos"></i>
+                <!--
+                                        <ul>
+                                            <li ng-repeat="style in carData.photos">
+                                                <img ng-src="http://media.ed.edmunds-media.com{{style.id.substring(9) + '_300.jpg'}}" style="margin:auto;">
+                                            </li>
+                                        </ul>
+                -->
+                <carousel interval="300000">
+                    <slide ng-repeat="style in carData.photos" active="style.active" class="ng-edmunds-carousel">
+                        <img ng-src="http://media.ed.edmunds-media.com{{style.id.substring(9) + '_300.jpg'}}" style="margin:auto;">
+                        <div class="carousel-caption">
+                            <p class="color-light">{{style.captionTranscript}}</p>
+                        </div>
+
+                    </slide>
+
+                </carousel>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div>
+</div>
+<!--/container-->

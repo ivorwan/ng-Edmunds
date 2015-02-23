@@ -1,4 +1,4 @@
-﻿        <!--=== Content Part ===-->
+﻿<!--=== Content Part ===-->
 <div class="container content">
 
     <div ng-controller="mainCtrl">
@@ -15,25 +15,27 @@
                             Make:
                         </div>
                         <div class="form-row">
-                            <select ng-options="make.id as make.name for make in makes" ng-model="make" ng-change="getModels(make)" class="form-control">
+                            <select ng-options="make.niceName as make.name for make in makes" ng-model="make" ng-change="getModels(make)" class="form-control">
 
                             </select>
+
                         </div>
                     </div>
                     <div class="col-sm-4 col-md-4 col-4" ng-show="models">
                         Model:
-                        <select ng-options="model.id as model.name for model in models" ng-model="model" ng-change="getYears(make, model)" class="form-control" ></select>
+                        <select ng-options="model.niceName as model.name for model in models" ng-model="model" ng-change="getYears(make, model)" class="form-control" ></select>
+
                     </div>
                     <div class="col-sm-4 col-md-4 col-4" ng-show="years">
                         Year:
-                        <select ng-options="year.id as year.name for year in years" ng-model="year" ng-change="getStyles(make, model, year)" class="form-control"></select>
+                        <select ng-options="year.id as year.name for year in years" ng-model="year" ng-change="goToDetail2(make, model, year)" iwng-change="getStyles(make, model, year)" class="form-control"></select>
                     </div>
 
                 </div>
 
             </div>
         </div>
-
+<!--
         <div class="headline"><h2>Available Trims</h2></div>
         <div class="col-md-12 md-margin-bottom-40 fade-animation">
             <span ng-hide="styles">Please select Make/Model/Year</span>
@@ -44,7 +46,7 @@
                 </li>
             </ul>
         </div>
-
+-->
         <div class="row margin-bottom-40">
         </div>
 
