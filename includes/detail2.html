@@ -74,7 +74,11 @@
                         By <b>{{review.author.authorName}}</b> on {{review.created | date : "MM/dd/yyyy h:mma"}}
 
                         <p>{{review.text}}</p>
-                        <span class="pull-right">{{review.thumbsUpDownCounter.thumbsUp}} <i class="fa fa-thumbs-up color-green"></i> - {{review.thumbsUpDownCounter.thumbsDown}} <i class="fa fa-thumbs-down color-red"></i></span>
+                        <b>Favorite Features</b>
+                        <p>{{review.favoriteFeatures}}</p>
+                        <b>Suggested Improvements</b>
+                        <p>{{review.suggestedImprovements}}</p>
+                        <span class="pull-right"><p>Found this review useful:{{review.thumbsUpDownCounter.thumbsUp}} <i class="fa fa-thumbs-up color-green"></i>  {{review.thumbsUpDownCounter.thumbsDown}} <i class="fa fa-thumbs-down color-red"></i></p></span>
                         <dl class="dl-horizontal">
                             <dt ng-repeat-start="rating in review.ratings">
                                 {{rating.type}}

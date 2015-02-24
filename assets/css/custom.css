@@ -1,3 +1,23 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+
+}
+
+.wrapper {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 450px;
+}
+
+.footer-v1 {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+}
+
 /* Add here all your css styles (customizations) */
 .nav, .pagination, .carousel, .panel-title a {
     cursor: pointer;
@@ -52,7 +72,6 @@
 
 #review-container {
     position: relative;
-    min-height: 500px;
 }
 
 #review-loading-data {
