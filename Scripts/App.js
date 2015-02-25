@@ -64,6 +64,21 @@
     ]);
 
 
+
+    // replaces _ with empty spaces
+    app.filter('removeUnderscores', function() {
+
+
+        return function(text, target, otherProp) {
+            text = text.replace(/_/g, ' ');
+
+
+            return text;
+        };
+    });
+
+
+
     //----- controllers
     app.controller('mainCtrl', ['$scope', '$location', 'edmundsSvc',
       function ($scope, $location, edmundsSvc) {

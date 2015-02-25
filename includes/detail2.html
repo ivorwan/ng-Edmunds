@@ -78,16 +78,25 @@
                         <p>{{review.favoriteFeatures}}</p>
                         <b>Suggested Improvements</b>
                         <p>{{review.suggestedImprovements}}</p>
-                        <span class="pull-right"><p>Found this review useful:{{review.thumbsUpDownCounter.thumbsUp}} <i class="fa fa-thumbs-up color-green"></i>  {{review.thumbsUpDownCounter.thumbsDown}} <i class="fa fa-thumbs-down color-red"></i></p></span>
-                        <dl class="dl-horizontal">
-                            <dt ng-repeat-start="rating in review.ratings">
-                                {{rating.type}}
-                            </dt>
-                            <dd ng-repeat-end>
-                                <rating ng-model="rating.value" readonly="true" class="color-red"></rating>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <dl class="dl-horizontal">
+                                    <dt ng-repeat-start="rating in review.ratings">
+                                        {{rating.type | removeUnderscores}}
+                                    </dt>
+                                    <dd ng-repeat-end>
+                                        <rating ng-model="rating.value" readonly="true" class="color-red"></rating>
 
-                            </dd>
-                        </dl>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="col-md-4">
+                                <span class=""><p>Found this review useful:{{review.thumbsUpDownCounter.thumbsUp}} <i class="fa fa-thumbs-up color-green"></i>  {{review.thumbsUpDownCounter.thumbsDown}} <i class="fa fa-thumbs-down color-red"></i></p></span>
+
+                            </div>
+                        </div>
+
+
                         <hr class="devider devider-db">
 
 
